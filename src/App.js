@@ -3,6 +3,7 @@ import Counter from "./components/Counter";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import HooksCounter from "./components/HooksCounter";
+import DynamicHooksCounter from "./components/DynamicHooksCounter";
 
 
 //need to wrap the root 'App' component with Provider from redux so that whole application can access the redux state
@@ -19,6 +20,7 @@ export default function App(){
 
         <div className="max-w-md mx-auto mt-10 space-y-5">
             <HooksCounter />
+            <DynamicHooksCounter />
         </div>
      </div>
 
