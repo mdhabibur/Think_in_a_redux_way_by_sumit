@@ -38,14 +38,34 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
+
+//so how this mapStateToProps call back function works:
+/*
+this mapStateToProps call back function is passed to connect() HOC
+, inside the connect() api this callback function is called and redux state is passed, and then the call back function returns the 
+count property from the 'state' and this 'count' is then passed to our Counter component
+
+
+
+*/
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		increment: (value) => dispatch(increment(5)),
 		decrement: (value) => dispatch(decrement(2)),
 
-
 	}
 }
+
+//so how this works:
+/*
+similar to mapStateToProps, this mapDispatchToProps call back is called from redux with the "dispatch" argument, and then the 
+call back returns the "increment" and "decrement" handler property inside which there is a function body.
+
+so when button will be clicked, this increment will be called,
+the function body will return dispatch() function means the dispatch() will be called and inside the dispatch(), the increment() will be called with the value argument
+
+*/
 
 
 
