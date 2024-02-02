@@ -3,6 +3,7 @@ import counterReducer from "./counter/counterReducer";
 import rootReducer from "./rootReducer";
 import myLogger from "./middlewares/myLogger";
 import logger from "redux-logger";
+import { composeWithDevTools } from "@redux-devtools/extension";
 
 
 /*
@@ -44,11 +45,8 @@ so middleware catches the 'action' before it is passed to 'reducer function' to 
 */
 
 
-
-
 //as createStore() method can take only one reducer function
-const store = createStore(rootReducer, applyMiddleware(logger,myLogger))
-
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, myLogger)))
 
 
 export default store
