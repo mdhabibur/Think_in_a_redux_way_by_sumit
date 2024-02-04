@@ -1,32 +1,41 @@
-import {useState} from "react"
-import Counter from "./components/Counter";
-import store from "./redux/store";
-import { Provider } from "react-redux";
-import HooksCounter from "./components/HooksCounter";
-import DynamicHooksCounter from "./components/DynamicHooksCounter";
-import VariableCounter from "./components/VariableCounter";
-
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
+import Footer from "./components/Footer";
 
 //need to wrap the root 'App' component with Provider from redux so that whole application can access the redux state
 
+export default function App() {
+	return (
 
-export default function App(){
-  return (
-    <Provider store={store}>
-      <div className="w-screen h-screen p-10 bg-gray-100 text-slate-700">
+    <div
+    class="grid place-items-center bg-blue-100 h-screen px-6 font-sans"
+>
+        {/* <!-- navbar --> */}
+        <Navbar />
 
-        <h1 className="max-w-md mx-auto text-center text-2xl font-bold">
-            Simple Counter Application
-        </h1>
 
-        <div className="max-w-md mx-auto mt-10 space-y-5">
-            <HooksCounter />
-            <DynamicHooksCounter />
-            <VariableCounter />
-            <VariableCounter dynamic />
-        </div>
-     </div>
+    <div class="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
+        {/* <!-- header --> */}
+        <Header />
 
-    </Provider>
-  )
+        <hr class="mt-4" />
+
+        {/* <!-- todo list --> */}
+        <TodoList />
+
+
+        <hr class="mt-4" />
+
+        {/* <!-- footer --> */}
+        <Footer />
+
+
+
+    </div>
+</div>
+
+    
+	);
 }
