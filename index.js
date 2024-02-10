@@ -6,6 +6,7 @@ const {
 	fetchAsyncMiddleware,
 } = require("./middlewares");
 const { fetchTodos } = require("./functions");
+const {thunk} = require("redux-thunk");
 
 const initialState = {
 	todos: [],
@@ -37,10 +38,9 @@ const todoReducer = (state = initialState, action) => {
 };
 
 //store
-const store = createStore(
-	todoReducer,
-	applyMiddleware(delayActionMiddleware, fetchAsyncMiddleware)
-);
+//using 'redux thunk middleware' to handle async tasks which will be passed as function body instead of action and after the async task is done then the real action will be called from that async function
+
+const store = createStore(todoReducer, applyMiddleware(thunk));
 
 //subscribe to state change so that components get updated with state change
 store.subscribe(() => {
@@ -60,3 +60,9 @@ store.subscribe(() => {
 
 //redux async thunk function: an alternative of action passing
 store.dispatch(fetchTodos);
+
+//so here 'thunk' middleware is doing the works in behind. it is taking the fetchTodos function and calling that function by passing 'dispatch' and 'getState' too.
+
+
+
+module.exports = store
