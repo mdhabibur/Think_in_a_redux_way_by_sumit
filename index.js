@@ -1,58 +1,51 @@
-//this is node js / common js code 
+//this is node js / common js code
 //so need to use require() syntax for imports
-const {createStore, applyMiddleware} = require('redux')
-const { delayActionMiddleware, fetchTodosMiddleware } = require('./middlewares')
-
-
+const { createStore, applyMiddleware } = require("redux");
+const {
+	delayActionMiddleware,
+	fetchAsyncMiddleware,
+} = require("./middlewares");
+const { fetchTodos } = require("./functions");
 
 const initialState = {
-    todos: [],
-}
-
+	todos: [],
+};
 
 //reducer
 const todoReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "todos/todoAdded":
-            return {
-                ...state,
-                todos: [
-                    ...state.todos,
-                    {
-                        title: action.payload
-                    }
+	switch (action.type) {
+		case "todos/todoAdded":
+			return {
+				...state,
+				todos: [
+					...state.todos,
+					{
+						title: action.payload,
+					},
+				],
+			};
 
-                ]
-            }
+		case "todos/todoLoaded":
+			return {
+				...state,
+				todos: [...state.todos, ...action.payload],
+			};
 
-        case "todos/todoLoaded":
-            return {
-                ...state,
-                todos: [...state.todos, ...action.payload]
-
-            }    
-
-            default:
-                return state
-
-
-    }
-}
-
-
-
+		default:
+			return state;
+	}
+};
 
 //store
 const store = createStore(
-    todoReducer,
-    applyMiddleware(delayActionMiddleware, fetchTodosMiddleware))
+	todoReducer,
+	applyMiddleware(delayActionMiddleware, fetchAsyncMiddleware)
+);
 
 //subscribe to state change so that components get updated with state change
 store.subscribe(() => {
-    console.log(store.getState())
-})
-
-
+	console.log(store.getState());
+});
 
 //dispatch action
 // store.dispatch({
@@ -61,6 +54,9 @@ store.subscribe(() => {
 // })
 
 //dispatching a fake action from where the "todos/todoLoaded" will be dispatched
-store.dispatch({
-    type: "todos/fetchTodos"
-})
+// store.dispatch({
+//     type: "todos/fetchTodos"
+// })
+
+//redux async thunk function: an alternative of action passing
+store.dispatch(fetchTodos);
