@@ -1,7 +1,8 @@
 //this is node js / common js code 
 //so need to use require() syntax for imports
 const {createStore, applyMiddleware} = require('redux')
-const { delayActionMiddleware } = require('./middlewares')
+const { delayActionMiddleware, fetchTodosMiddleware } = require('./middlewares')
+
 
 
 const initialState = {
@@ -24,6 +25,13 @@ const todoReducer = (state = initialState, action) => {
                 ]
             }
 
+        case "todos/todoLoaded":
+            return {
+                ...state,
+                todos: [...state.todos, ...action.payload]
+
+            }    
+
             default:
                 return state
 
@@ -37,7 +45,7 @@ const todoReducer = (state = initialState, action) => {
 //store
 const store = createStore(
     todoReducer,
-    applyMiddleware(delayActionMiddleware))
+    applyMiddleware(delayActionMiddleware, fetchTodosMiddleware))
 
 //subscribe to state change so that components get updated with state change
 store.subscribe(() => {
@@ -47,8 +55,12 @@ store.subscribe(() => {
 
 
 //dispatch action
+// store.dispatch({
+//     type: "todos/todoAdded",
+//     payload: "learn react from lws"
+// })
 
+//dispatching a fake action from where the "todos/todoLoaded" will be dispatched
 store.dispatch({
-    type: "todos/todoAdded",
-    payload: "learn react from lws"
+    type: "todos/fetchTodos"
 })

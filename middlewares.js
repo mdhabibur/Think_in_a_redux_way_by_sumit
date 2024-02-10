@@ -1,9 +1,7 @@
-
-
+const fetch = require('node-fetch')
 
 //async task in javascript/react/redux : same concept of javascript
-
-const delayActionMiddleware = (store) => (next) => (action) => {
+ const delayActionMiddleware = (store) => (next) => (action) => {
 
     //before the 'action' goes to reducer function, middleware will catch it and do the necessary works
     if(action.type === "todos/todoAdded"){
@@ -29,4 +27,28 @@ const delayActionMiddleware = (store) => (next) => (action) => {
 
 }
 
-module.exports = {delayActionMiddleware}
+ const fetchTodosMiddleware = (store) => (next) => async (action) => {
+    if(action.type === "todos/fetchTodos"){
+        //fetch the todos from api
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
+        const todos = await response.json()
+
+        store.dispatch({
+            type: "todos/todoLoaded",
+            payload: todos
+        })
+
+        console.log(`number of updated todos: ${store.getState().todos.length}`)
+
+
+
+        return;
+
+
+    }
+
+    return next(action)
+
+}
+
+module.exports = {delayActionMiddleware, fetchTodosMiddleware}
