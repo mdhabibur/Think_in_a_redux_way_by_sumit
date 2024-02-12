@@ -22,12 +22,6 @@
       "id": "4",
       "text": "todo4",
       "completed": false
-    },
-    {
-      "id": "5",
-      "text": "todo5",
-      "completed": true,
-      "color": "red"
     }
   ]
 }

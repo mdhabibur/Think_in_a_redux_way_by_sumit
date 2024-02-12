@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { colorSelected, deleteTodo, toggleCompleted } from "../redux/todos/actions";
 import updateCompleteStatus from "../redux/todos/thunk/updateCompleteStatus";
 import updateColor from "../redux/todos/thunk/updateColor";
+import deleteTodoFromServer from "../redux/todos/thunk/deleteTodoFromServer";
 
 const Todo = ({ todo }) => {
 	const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Todo = ({ todo }) => {
     }
 
     const handleDeleteTodo = (id) => {
-        dispatch(deleteTodo(id))
+        dispatch(deleteTodoFromServer(id))
 
     }
 
