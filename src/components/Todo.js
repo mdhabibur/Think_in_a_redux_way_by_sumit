@@ -2,18 +2,20 @@ import React from "react";
 import cancel from "../assets/images/cancel.png";
 import { useDispatch, useSelector } from "react-redux";
 import { colorSelected, deleteTodo, toggleCompleted } from "../redux/todos/actions";
+import updateCompleteStatus from "../redux/todos/thunk/updateCompleteStatus";
+import updateColor from "../redux/todos/thunk/updateColor";
 
 const Todo = ({ todo }) => {
 	const dispatch = useDispatch();
 
 	const { id, text, color, completed } = todo;
 
-	const handleToggleCompletedChange = (id) => {
-		dispatch(toggleCompleted(id));
+	const handleToggleCompletedChange = () => {
+		dispatch(updateCompleteStatus(id, completed));
 	};
 
     const handleColorSelected = (id, color) => {
-        dispatch(colorSelected(id,color))
+        dispatch(updateColor(id,color))
     }
 
     const handleDeleteTodo = (id) => {

@@ -26,7 +26,8 @@
     {
       "id": "5",
       "text": "todo5",
-      "completed": false
+      "completed": true,
+      "color": "red"
     }
   ]
 }
