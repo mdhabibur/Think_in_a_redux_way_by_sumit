@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import notes from '../assets/images/notes.png'
 import doubleTick from '../assets/images/double-tick.png'
 import plusImage from '../assets/images/plus.png'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, clearCompleted, completeAllTodos } from '../redux/todos/actions'
+import uploadTodo from '../redux/todos/thunk/uploadTodo'
 
 const Header = () => {
     const dispatch = useDispatch()
+    const todos = useSelector((state) => state.todo)
 
     const [todoText, setTodoText] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(addTodo(todoText))
+
+        dispatch(uploadTodo(todoText, todos.length+1))
         setTodoText('')
     }
 

@@ -9,10 +9,11 @@ const nextTodoId = (state) => {
 const reducerTodo = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_TODO:
+
 			return [
 				...state,
 				{
-					id: nextTodoId(state),
+					id: nextTodoId(state).toString(),
 					todoText: action.payload,
 					completed: false,
 				},

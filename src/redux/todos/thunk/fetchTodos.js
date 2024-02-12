@@ -9,9 +9,6 @@ const fetchTodos = async (dispatch, getState) => {
 
    dispatch(todosLoaded(todos))
 
-
-
 }
-
 
 export default fetchTodos

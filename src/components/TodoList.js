@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Todo from "./Todo";
 import { useDispatch, useSelector } from "react-redux";
 import fetchTodos from "../redux/todos/thunk/fetchTodos";
+import initialState from "../redux/filter/initialState";
+import uploadTodo from "../redux/todos/thunk/uploadTodo";
 
 export default function TodoList () {
 
@@ -13,7 +15,7 @@ export default function TodoList () {
 
   useEffect(() => {
     dispatch(fetchTodos)
-  }, [dispatch])
+  }, [dispatch, uploadTodo])
   
   
 
@@ -44,7 +46,7 @@ export default function TodoList () {
 	return (
 		<div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
 
-			{/* <!-- todo --> */}
+			{/* <!-- todo --> */}      
 			{todos
       .filter(filterByStatus)
       .filter(filterbyColor)
