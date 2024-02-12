@@ -1,4 +1,4 @@
-import { ADD_TODO, CLEAR_COMPLETED, COLOR_SELECTED, COMPLETE_ALL_TODOS, DELETE_TODO, TOGGLE_COMPLETED } from "./actionTypes";
+import { ADD_TODO, CLEAR_COMPLETED, COLOR_SELECTED, COMPLETE_ALL_TODOS, DELETE_TODO, LOADED_TODOS, TOGGLE_COMPLETED } from "./actionTypes";
 import { initialState } from "./initialState";
 
 const nextTodoId = (state) => {
@@ -17,6 +17,9 @@ const reducerTodo = (state = initialState, action) => {
 					completed: false,
 				},
 			];
+
+		case LOADED_TODOS:
+			return action.payload
 
 		case TOGGLE_COMPLETED:
 			return state.map((todo) => {

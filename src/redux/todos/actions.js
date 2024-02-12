@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_COMPLETED, COLOR_SELECTED, DELETE_TODO, COMPLETE_ALL_TODOS, CLEAR_COMPLETED } from "./actionTypes";
+import { ADD_TODO, TOGGLE_COMPLETED, COLOR_SELECTED, DELETE_TODO, COMPLETE_ALL_TODOS, CLEAR_COMPLETED, LOADED_TODOS } from "./actionTypes";
 
 export const addTodo = (todoText) => {
 	return {
@@ -6,6 +6,13 @@ export const addTodo = (todoText) => {
 		payload: todoText,
 	};
 };
+
+export const todosLoaded = (todos) => {
+    return {
+        type: LOADED_TODOS,
+        payload: todos
+    }
+}
 
 export const toggleCompleted = (todoId) => {
 	return {

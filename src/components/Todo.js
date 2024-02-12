@@ -6,7 +6,7 @@ import { colorSelected, deleteTodo, toggleCompleted } from "../redux/todos/actio
 const Todo = ({ todo }) => {
 	const dispatch = useDispatch();
 
-	const { id, todoText, color, completed } = todo;
+	const { id, text, color, completed } = todo;
 
 	const handleToggleCompletedChange = (id) => {
 		dispatch(toggleCompleted(id));
@@ -49,7 +49,7 @@ const Todo = ({ todo }) => {
 			<div
 				className={`select-none flex-1 ${completed === true && "line-through"}`}
 			>
-				{todoText}
+				{text}
 			</div>
 
 			<div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500
