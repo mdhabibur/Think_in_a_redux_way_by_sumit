@@ -40,7 +40,7 @@ const counterSlice = createSlice({
             state.count--
         },
     }
-
+ 
 })
 
 //need to export the reducers and actions
